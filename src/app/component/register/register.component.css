@@ -1,0 +1,45 @@
+.registration-container {
+    height: 100vh;
+  }
+  
+  .registration-card {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px;
+  }
+  
+  .password-container {
+    position: relative;
+  }
+  
+  .show-password-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 0.9rem;
+    color: #007bff;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .show-password-btn:hover {
+    color: #0056b3;
+  }
+  
+  .form-control {
+    padding-right: 60px; /* Adds space for the button inside the input */
+  }
+  
+  .back-to-login-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .back-to-login-link:hover {
+    text-decoration: underline;
+  }
+  

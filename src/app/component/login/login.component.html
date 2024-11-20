@@ -1,0 +1,53 @@
+<div class="login-container">
+    <div class="login-left">
+      <h2>Login! 👋</h2>
+  
+      <!-- Email & Password Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="test@atheros.ai"
+          [ngClass]="{'is-invalid': email?.invalid && email?.touched}"
+        />
+        <div *ngIf="email?.invalid && email?.touched" class="error">
+          <small *ngIf="email?.errors?.['required']">Email is required.</small>
+          <small *ngIf="email?.errors?.['email']">Please enter a valid email.</small>
+        </div>
+  
+        <label for="password">Password</label>
+        <div class="password-container">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            placeholder="******"
+            [ngClass]="{'is-invalid': password?.invalid && password?.touched}"
+          />
+          <button type="button" class="show-password" (click)="toggleShowPassword()">
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <div *ngIf="password?.invalid && password?.touched" class="error">
+          <small *ngIf="password?.errors?.['required']">Password is required.</small>
+          <small *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters.</small>
+        </div>
+  
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-signin" [disabled]="loginForm.invalid">Sign In</button>
+      </form>
+  
+      <p>Don't have an account? <a href="/register">Sign Up Now</a></p>
+    </div>
+  
+    <div class="login-right">
+      <div class="login-info">
+        <h3>Why should I login?</h3>
+        <p>By logging in, you can access your personal dashboard, where you can manage your account, view your profile, and much more.</p>
+        <img src="#" alt="Dashboard example">
+      </div>
+    </div>
+  </div>
+  

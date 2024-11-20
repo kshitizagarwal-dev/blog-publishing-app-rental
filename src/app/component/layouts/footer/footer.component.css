@@ -1,0 +1,41 @@
+/* Footer Styles */
+footer {
+    height: 130px;
+    padding: 15px;
+    background-color: var(--navbar-footer-color); /* Footer background color */
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  /* Logo Styling */
+  .site-logo {
+    font-size: 1.2em; /* Slightly larger font size */
+    font-weight: bold; /* Make the logo stand out */
+    color: var(--primary-color); /* Theme primary color */
+    margin-bottom: 10px;
+  }
+  
+  /* Text Styling */
+  footer p {
+    font-size: 0.9em; /* Subtle and clean typography */
+    color: #ffffff; /* Default text color */
+    margin: 0;
+  }
+  
+  /* Link Styling */
+  .nav-link {
+    color: var(--primary-color); /* Matches the theme's primary color */
+    text-decoration: none;
+  }
+  
+  .nav-link:hover {
+    text-decoration: underline; /* Adds emphasis on hover */
+  }
+  
