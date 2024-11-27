@@ -37,16 +37,16 @@
                   <td width="10">{{ i + 1 }}</td>
                   <td width="200">
                     <img
-                      src="{{ post.data.postImgPath }}"
+                      src="104.jpg"
                       alt=""
                       class="img img-fluid"
                     />
                   </td>
-                  <td width="200">{{ post.data.title }}</td>
+                  <td width="200">{{ post.title }}</td>
                   <!-- <td width="200">{{ post.data.excerpt }}</td> -->
-                  <td>{{ post.data.category.category }}</td>
+                  <td>{{ post.category }}</td>
                   <td>
-                    {{ post.data.createdAt.toMillis() | date }}
+                    {{ post.createdAt.toMillis() | date }}
                   </td>
                   <td width="600">
                     <button

@@ -1,0 +1,47 @@
+.comments-section {
+    font-family: Arial, sans-serif;
+  }
+  
+  .sort-options {
+    margin-bottom: 15px;
+  }
+  
+  .new-comment textarea,
+  .reply-input textarea {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .new-comment button,
+  .reply-input button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .comment {
+    margin: 15px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .timestamp {
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  .replies {
+    margin-left: 20px;
+    border-left: 1px solid #ddd;
+    padding-left: 10px;
+  }
+  

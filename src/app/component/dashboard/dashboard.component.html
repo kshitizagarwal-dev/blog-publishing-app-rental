@@ -1,0 +1,93 @@
+<header>
+    <nav class="navbar">
+      <div class="navbar-left">
+        <a routerLink="/">Home</a>
+      </div>
+      <div class="navbar-right">
+        <!-- Display when logged in -->
+        <div *ngIf="isLoggedIn; else notLoggedIn">
+          <a routerLink="/create">Create</a>
+          <a routerLink="/posts">Posts</a>
+          <div class="user-profile">
+            <img [src]="userProfilePicture" alt="User Profile" class="profile-img" />
+            <span>{{ userName }}</span>
+          </div>
+          <a (click)="logout()">Logout</a>
+        </div>
+  
+        <!-- Display when not logged in -->
+        <ng-template #notLoggedIn>
+          <a (click)="redirectToLogin()">Login</a>
+          <a routerLink="/register">Sign Up</a>
+        </ng-template>
+      </div>
+    </nav>
+  </header>
+<div class="home-container">
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input
+        type="text"
+        placeholder="Search by keyword or author..."
+        [(ngModel)]="searchQuery"
+        (input)="onSearch()"
+      />
+      <button (click)="onSearch()">Search</button>
+    </div>
+    <div class="sorting-options">
+        <label for="sort">Sort by:</label>
+        <select id="sort" [(ngModel)]="sortOption" (change)="onSortChange()">
+          <option value="latest">Latest</option>
+          <option value="popular">Most Popular</option>
+          <option value="editor">Editor's Pick</option>
+        </select>
+      </div>
+
+    <section class="article-feed">
+        <h2>Featured Article</h2>
+        <div class="article-card" *ngFor="let article of filteredArticles">
+          <img
+            [src]="article.thumbnail || 'default-thumbnail.jpg'"
+            alt=""
+            class="article-thumbnail"
+          />
+          <div class="article-info">
+            <h3 [routerLink]="['/post', article.postId]">{{ article.title }}</h3>
+            <p>{{ article.description }}</p>
+            <div class="article-meta">
+              <span>{{ article.author }}</span> |
+              <span>{{ article.publishDate | date }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+    <!-- Featured Articles Section -->
+    <section class="featured-articles">
+      <h2> Articles Feed </h2>
+      <div class="featured-article" *ngFor="let article of articles">
+        <img
+          src="104.jpg"
+          alt=""
+          class="featured-thumbnail"
+        />
+        <div class="featured-content">
+          <h3 [routerLink]="['/post', article.postId]">
+            {{ article.title }}
+          </h3>
+          <p (click)="goToArticleDetail(article.postId)">{{ article.description }}</p>
+          <div class="article-meta">
+            <span>{{ article.author }}</span> |
+            <span>{{ article.publishDate }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Sorting Options -->
+
+  
+    <!-- Article Feed Section -->
+   
+  </div>
+  

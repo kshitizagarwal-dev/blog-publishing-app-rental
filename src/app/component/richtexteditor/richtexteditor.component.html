@@ -1,0 +1,11 @@
+<div class="editor-container">
+    <quill-editor
+      [(ngModel)]="editorContent"
+      [modules]="quillConfig"
+      theme = "snow"
+      (onContentChanged)="onContentChange($event)"
+    >
+    </quill-editor>
+    <button class="btn btn-primary mt-3" (click)="saveContent()">Save</button>
+  </div>
+  

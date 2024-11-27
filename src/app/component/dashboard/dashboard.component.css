@@ -1,0 +1,126 @@
+.home-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+  }
+  
+  .search-bar {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  .search-bar button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .search-bar button:hover {
+    background-color: #0056b3;
+  }
+  
+  .featured-articles {
+    margin-bottom: 40px;
+  }
+  
+  .featured-articles h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .featured-article {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .featured-thumbnail {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+  }
+  
+  .featured-content {
+    padding: 10px;
+    flex: 1;
+  }
+  
+  .featured-content h3 {
+    font-size: 18px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .featured-content p {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .article-meta {
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .sorting-options {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .sorting-options select {
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 14px;
+  }
+  
+  .article-feed h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .article-card {
+    display: flex;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .article-thumbnail {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  
+  .article-info {
+    padding: 10px;
+    flex: 1;
+  }
+  
+  .article-info h3 {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  .article-info p {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  

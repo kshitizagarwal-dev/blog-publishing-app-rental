@@ -1,7 +1,6 @@
 import { Injectable, NgZone, inject  } from '@angular/core';
-import { User } from "./user";
 
-import { Auth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword, user
+import { Auth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword, user, signOut, onAuthStateChanged
 } from '@angular/fire/auth';
 
 import { Router } from '@angular/router';
@@ -22,7 +21,7 @@ export class AuthenticationService {
   loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isLoggedInGuard: boolean = false;
   public firestore : Firestore = inject(Firestore);
-  
+
   constructor(public auth : Auth, 
     private toastr : ToastrService,
     private router : Router
@@ -37,7 +36,6 @@ export class AuthenticationService {
         this.loadUser();
         this.loggedIn.next(true);
         this.isLoggedInGuard = true;
-        this.router.navigate(['/']);
         },
         err=>{
           console.log("Some error ocuured", err);
@@ -46,8 +44,31 @@ export class AuthenticationService {
       )
   }
 
+  logout(){
+    signOut(this.auth).then(() => {
+      this.toastr.success(' User Logged Out Successfully');
+      localStorage.removeItem('user');
+      this.loggedIn.next(false);
+      this.isLoggedInGuard = false;
+      this.router.navigate(['/login']);
+    });
+  }
+
+  isLoggedIn() {
+    return this.loggedIn.asObservable();
+  }
+
   loadUser(){
-    this.auth.authState
+
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        // User is signed in, save user info to localStorage
+        localStorage.setItem('user', JSON.stringify(user));
+      } else {
+        // User is signed out, clear localStorage
+        localStorage.removeItem('user');
+      }
+    });
   }
 
   //registation of user 

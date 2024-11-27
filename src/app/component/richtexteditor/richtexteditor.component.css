@@ -1,0 +1,9 @@
+.editor-container {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  quill-editor {
+    height: 300px;
+  }
+  

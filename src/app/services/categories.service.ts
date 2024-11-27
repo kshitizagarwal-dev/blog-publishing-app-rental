@@ -20,7 +20,7 @@ export class CategoriesService {
     //save data 
   saveData(data : any){
     const categoryId = this.generateId();
-    setDoc(doc(this.firestore, 'categories', categoryId.toString()),{
+    setDoc(doc(this.firestore, 'authors', categoryId.toString()),{
       data,
       Id: categoryId
     }).then((docRef)=>{
@@ -33,7 +33,7 @@ export class CategoriesService {
 
   //load data 
   async loadData(){
-    const vas = await getDocs(query(collection(this.firestore, 'categories')));
+    const vas = await getDocs(query(collection(this.firestore, 'authors')));
     var data = vas.docs.map((propertie)=>propertie.data());
     console.log("New value is ",data);
     return data;
@@ -42,7 +42,7 @@ export class CategoriesService {
 
   //update data 
   updateData(id: any, editdata: any){
-    updateDoc(doc(this.firestore, 'categories', id.toString()), {
+    updateDoc(doc(this.firestore, 'authors', id.toString()), {
       editdata
     }).then((docRef)=>{
       console.log("Data added successfully", docRef);
@@ -55,4 +55,9 @@ export class CategoriesService {
   // deleteData(id: any){
   //   return delete(doc(this.firestore, 'users', id.toString()))
   // }
+
+  //load featured
+  loadFeatured(){
+
+  }
 }

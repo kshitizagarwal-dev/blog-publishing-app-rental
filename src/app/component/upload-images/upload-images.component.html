@@ -1,0 +1,4 @@
+<input type="file" (change)="onImageUpload($event)" multiple>
+<div *ngFor="let image of images">
+  <img [src]="image" alt="Uploaded Image" width="150">
+</div>

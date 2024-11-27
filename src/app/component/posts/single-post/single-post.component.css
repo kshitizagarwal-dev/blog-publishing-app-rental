@@ -1,0 +1,158 @@
+/* Container for the entire article */
+
+.article-meta .comments {
+    font-size: 1rem;
+    color: #666;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+  }
+  
+  .article-meta .comments i {
+    margin-right: 8px; /* Space between the icon and the text */
+    color: #007bff;    /* Set the icon color */
+  }
+  
+  .article-meta .comments:hover {
+    text-decoration: underline;
+  }
+  
+/* Back Button */
+.back-button {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .back-button button {
+    background-color: transparent;
+    border: none;
+    font-size: 0.8rem;
+    color: #020c17;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .back-button button i {
+    margin-right: 8px;
+    font-size: 0.8rem;
+  }
+  
+  .back-button button:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+
+.article-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Article Title */
+  .article-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* Article Meta - Author, Comments, Views, Publish Date */
+  .article-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .article-meta p {
+    margin: 0;
+  }
+
+
+  
+  .article-meta .author-name {
+    font-weight: bold;
+  }
+  
+  .article-meta .comments,
+  .article-meta .views {
+    font-style: italic;
+  }
+  
+  .article-meta .publish-date {
+    color: #999;
+  }
+  
+  /* Article Image */
+  .article-image img {
+    justify-content: center;
+    max-width: 40%;  /* Default size for medium image */
+    height: auto;
+    width: fit-content;
+    max-height: 50%;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Adds shadow around the image */
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .article-image img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
+  
+  /* Article Content */
+  .article-content {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Adds shadow around content */
+  }
+  
+  .article-content p {
+    margin-bottom: 20px;
+  }
+  
+  /* Views Icon */
+  .article-meta .views i {
+    margin-right: 8px; /* Space between the icon and the text */
+    color: #007bff; /* Set the icon color */
+    font-size: 1.2rem; /* Adjust icon size */
+  }
+  
+  /* Additional Styles for Responsive Layout */
+  @media (max-width: 768px) {
+    .article-container {
+      width: 90%;
+    }
+  
+    .article-title {
+      font-size: 2rem;
+    }
+  
+    .article-meta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .article-meta p {
+      margin-bottom: 10px;
+    }
+  
+    .article-content {
+      padding: 15px;
+    }
+  }
+  

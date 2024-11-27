@@ -1,0 +1,146 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h3 class="text-primary mb-3">{{ formStatus }} Post</h3>
+        <p class="text-muted">You can {{ formStatus }} your post here.</p>
+      </div>
+    </div>
+  
+    <form [formGroup]="postForm" (ngSubmit)="saveContent()">
+      <div class="row">
+        <!-- Title Section -->
+        <div class="col-md-7 mb-4">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="title" class="form-label fw-bold">Title</label>
+                <input
+                  type="text"
+                  id="title"
+                  class="form-control"
+                  formControlName="title"
+                  [ngClass]="{
+                    'is-invalid': fc['title'].touched && fc['title'].invalid
+                  }"
+                  (keyup)="onTitleChanged($event)"
+                  placeholder="Enter post title"
+                />
+                <small class="text-danger" *ngIf="fc['title'].errors">
+                  <div
+                    *ngIf="fc['title'].touched && fc['title'].errors['required']"
+                  >
+                    Title is required.
+                  </div>
+                  <div *ngIf="fc['title'].errors['minlength']">
+                    Title must be at least 10 characters long.
+                  </div>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Category and Image Section -->
+        <div class="col-md-5 mb-4">
+          <div class="card shadow-sm border-0">
+            <div class="card-body">
+              <div class="form-group mb-3">
+                <label for="category" class="form-label fw-bold">Category</label>
+                <select
+                  id="category"
+                  class="form-control"
+                  formControlName="category"
+                >
+                  <option value="" disabled>Please select a category</option>
+                  <option
+                    [value]="category.id + '-' + category.data.category"
+                    *ngFor="let category of categories"
+                  >
+                    {{ category.data.category }}
+                  </option>
+                </select>
+                <small class="text-danger" *ngIf="fc['category'].errors">
+                  <div
+                    *ngIf="
+                      fc['category'].touched && fc['category'].errors['required']
+                    "
+                  >
+                    Category is required.
+                  </div>
+                </small>
+              </div>
+              <div class="form-group">
+                <label for="postImg" class="form-label fw-bold">Post Image</label>
+                <img
+                  [src]="imgSrc"
+                  class="img-fluid img-preview border rounded mb-3"
+                  alt="Preview of the uploaded post image"
+                />
+                <input
+                  type="file"
+                  id="postImg"
+                  class="form-control"
+                  accept="image/*"
+                  formControlName="postImg"
+                  (change)="showPreview($event)"
+                />
+                <small class="text-danger" *ngIf="fc['postImg'].errors">
+                  <div
+                    *ngIf="
+                      fc['postImg'].touched && fc['postImg'].errors['required']
+                    "
+                  >
+                    Post image is required.
+                  </div>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Content Section -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="content" class="form-label fw-bold">Content</label>
+                <div class="editor-container scrollable-editor">
+                  <quill-editor 
+                    formControlName="content"
+                    [modules]="quillConfig"
+                    theme="snow"
+                    (onContentChanged)="onContentChange($event)"
+                  >
+                  </quill-editor>
+                </div>
+                <small class="text-danger" *ngIf="fc['content'].errors">
+                  <div
+                    *ngIf="
+                      fc['content'].touched && fc['content'].errors['required']
+                    "
+                  >
+                    Content is required.
+                  </div>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Submit Buttons -->
+      <div class="row text-center">
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-primary me-3">
+            {{ formStatus }} Post
+          </button>
+          <button type="button" class="btn btn-secondary" (click) = "navigateToPost()">
+            Back to Posts
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

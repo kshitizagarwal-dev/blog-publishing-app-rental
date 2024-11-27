@@ -1,0 +1,39 @@
+<div class="article-container">
+    <div class="back-button">
+        <button (click)="goBack()">
+          <i class="fas fa-arrow-left"></i>Back
+        </button>
+      </div>
+    
+    <!-- Article Title -->
+    <h1 class="article-title">{{ article?.title }}</h1>
+  
+    <!-- Author, Comments, Views, and Publish Date -->
+    <div class="article-meta">
+      <p class="author-name">By {{ article?.author }}</p>
+      <!-- <p class="comments">{{ article?.comments.length }} Comments</p> -->
+      
+      <!-- Views with Icon -->
+      <p class="views">
+        <i class="fas fa-eye"></i> {{ article?.views }}
+
+
+      <p class="comments" (click) = "goToComments()" >
+        <i class="fas fa-comment"></i>
+        <a >View Comments</a>
+      </p>
+      
+      <p class="publish-date">{{ article?.publishDate | date: 'longDate' }}</p>
+    </div>
+  
+    <!-- Article Image -->
+    <div class="article-image">
+      <img src="104.jpg" alt="Article Image" />
+    </div>
+  
+    <!-- Article Content -->
+    <div class="article-content">
+      <p>{{ article?.description }}</p>
+    </div>
+  </div>
+  

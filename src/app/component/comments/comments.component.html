@@ -1,0 +1,76 @@
+<header>
+    <nav class="navbar">
+      <div class="navbar-left">
+        <a routerLink="/">Home</a>
+      </div>
+      <div class="navbar-right">
+        <!-- Display when logged in -->
+        <div *ngIf="isLoggedIn; else notLoggedIn">
+          <a routerLink="/create">Create</a>
+          <a routerLink="/posts">Posts</a>
+          <div class="user-profile">
+            <img [src]="userProfilePicture" alt="User Profile" class="profile-img" />
+            <span>{{ userName }}</span>
+          </div>
+          <a (click)="logout()">Logout</a>
+        </div>
+  
+        <!-- Display when not logged in -->
+        <ng-template #notLoggedIn>
+          <a (click)="redirectToLogin()">Login</a>
+          <a routerLink="/register">Sign Up</a>
+        </ng-template>
+      </div>
+    </nav>
+  </header>
+<div class="comments-section">
+    <div class="close-button">
+        <button (click)="goBack()" aria-label="Close">
+          &#x2715; <!-- Unicode for 'X' (cross) -->
+        </button>
+      </div>
+    <!-- Sort Options -->
+    <div class="sort-options">
+      <label for="sort">Sort by:</label>
+      <select id="sort" [(ngModel)]="sortOption" (change)="onSortChange(sortOption)">
+        <option value="newest">Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="mostLiked">Most Liked</option>
+      </select>
+    </div>
+  
+    <!-- Post New Comment -->
+    <div class="new-comment">
+      <textarea [(ngModel)]="newCommentContent" placeholder="Add a comment..." rows="4"></textarea>
+      <button (click)="postComment()">Post Comment</button>
+    </div>
+  
+    <!-- Display Comments -->
+    <div *ngFor="let comment of comments">
+      <div class="comment">
+        <div class="comment-header">
+          <strong>{{ comment.author }}</strong>
+          <button (click)="likeComment(comment.id)">👍 {{ comment.likes }}</button>
+        </div>
+        <p>{{ comment.content }}</p>
+  
+        <!-- Replies -->
+        <div class="replies" *ngIf="comment.replies && comment.replies.length > 0">
+          <h4>Replies:</h4>
+          <div *ngFor="let reply of comment.replies">
+            <div class="reply">
+              <p>{{ reply }}</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Reply to Comment -->
+        <div class="reply-input">
+            <!-- Bind the textarea value to a local variable (e.g., #replyInput) -->
+            <textarea #replyInput placeholder="Reply to this comment..." rows="3"></textarea>
+            <button (click)="postReply(comment.id,replyInput.value)">Post Reply</button>
+          </div>
+        </div>
+    </div>
+  </div>
+  

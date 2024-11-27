@@ -18,23 +18,32 @@ export class LoginComponent {
   loginForm: FormGroup;
   showPassword: boolean = false;
   errorMessage: string = '';
- 
+  returnUrl: string = '/';
 
   constructor(private authentication : AuthenticationService, private route : Router, private fb: FormBuilder
-    , private categories : CategoriesService
+    , private categories : CategoriesService,
+    private router :ActivatedRoute
  
   ){ 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+  }
 
+  ngOnInit(): void {
+    // Retrieve the returnUrl from query parameters
+    this.router.queryParams.subscribe((params) => {
+      this.returnUrl = params['returnUrl'] || '/dashboard';
+    });
   }
 
   login(){
     const {email, password} = this.loginForm.value;
    var user =  this.authentication.signIn(email, password);
    console.log("user logged ins ");
+   console.log(this.returnUrl);
+   this.route.navigateByUrl(this.returnUrl);
   }
 
   toggleShowPassword() {
