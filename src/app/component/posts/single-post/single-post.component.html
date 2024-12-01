@@ -33,7 +33,7 @@
   
     <!-- Article Content -->
     <div class="article-content">
-      <p>{{ article?.description }}</p>
+      <div *ngIf="sanitizedDescription" [innerHTML]="sanitizedDescription"></div>
     </div>
   </div>
   

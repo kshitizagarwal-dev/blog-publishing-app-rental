@@ -1,146 +1,68 @@
-<div class="container mt-5">
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h3 class="text-primary mb-3">{{ formStatus }} Post</h3>
-        <p class="text-muted">You can {{ formStatus }} your post here.</p>
+<div class="container">
+  <h1>{{ formStatus }} Post</h1>
+  
+  <form [formGroup]="postForm" (ngSubmit)="saveContent()">
+
+    
+    <div class="form-group">
+      <label for="title">Post Title</label>
+      <input type="text" id="title" formControlName="title" placeholder="Enter post title" />
+      <div *ngIf="fc['title'].invalid && fc['title'].touched" class="error">
+        Title is required and must be at least 10 characters long.
       </div>
     </div>
-  
-    <form [formGroup]="postForm" (ngSubmit)="saveContent()">
-      <div class="row">
-        <!-- Title Section -->
-        <div class="col-md-7 mb-4">
-          <div class="card shadow-sm border-0">
-            <div class="card-body">
-              <div class="form-group">
-                <label for="title" class="form-label fw-bold">Title</label>
-                <input
-                  type="text"
-                  id="title"
-                  class="form-control"
-                  formControlName="title"
-                  [ngClass]="{
-                    'is-invalid': fc['title'].touched && fc['title'].invalid
-                  }"
-                  (keyup)="onTitleChanged($event)"
-                  placeholder="Enter post title"
-                />
-                <small class="text-danger" *ngIf="fc['title'].errors">
-                  <div
-                    *ngIf="fc['title'].touched && fc['title'].errors['required']"
-                  >
-                    Title is required.
-                  </div>
-                  <div *ngIf="fc['title'].errors['minlength']">
-                    Title must be at least 10 characters long.
-                  </div>
-                </small>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <!-- Category and Image Section -->
-        <div class="col-md-5 mb-4">
-          <div class="card shadow-sm border-0">
-            <div class="card-body">
-              <div class="form-group mb-3">
-                <label for="category" class="form-label fw-bold">Category</label>
-                <select
-                  id="category"
-                  class="form-control"
-                  formControlName="category"
-                >
-                  <option value="" disabled>Please select a category</option>
-                  <option
-                    [value]="category.id + '-' + category.data.category"
-                    *ngFor="let category of categories"
-                  >
-                    {{ category.data.category }}
-                  </option>
-                </select>
-                <small class="text-danger" *ngIf="fc['category'].errors">
-                  <div
-                    *ngIf="
-                      fc['category'].touched && fc['category'].errors['required']
-                    "
-                  >
-                    Category is required.
-                  </div>
-                </small>
-              </div>
-              <div class="form-group">
-                <label for="postImg" class="form-label fw-bold">Post Image</label>
-                <img
-                  [src]="imgSrc"
-                  class="img-fluid img-preview border rounded mb-3"
-                  alt="Preview of the uploaded post image"
-                />
-                <input
-                  type="file"
-                  id="postImg"
-                  class="form-control"
-                  accept="image/*"
-                  formControlName="postImg"
-                  (change)="showPreview($event)"
-                />
-                <small class="text-danger" *ngIf="fc['postImg'].errors">
-                  <div
-                    *ngIf="
-                      fc['postImg'].touched && fc['postImg'].errors['required']
-                    "
-                  >
-                    Post image is required.
-                  </div>
-                </small>
-              </div>
-            </div>
-          </div>
-        </div>
+
+    <div class="form-group">
+      <label for="postImg">Post Image</label>
+      <input type="file" id="postImg" (change)="showPreview($event)" />
+      <img [src]="imgSrc" alt="Post Image Preview" class="img-preview" />
+      <div *ngIf="fc['postImg'].invalid && fc['postImg'].touched" class="error">
+        Post image is required.
       </div>
-  
-      <!-- Content Section -->
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card shadow-sm border-0 mb-4">
-            <div class="card-body">
-              <div class="form-group">
-                <label for="content" class="form-label fw-bold">Content</label>
-                <div class="editor-container scrollable-editor">
-                  <quill-editor 
-                    formControlName="content"
-                    [modules]="quillConfig"
-                    theme="snow"
-                    (onContentChanged)="onContentChange($event)"
-                  >
-                  </quill-editor>
-                </div>
-                <small class="text-danger" *ngIf="fc['content'].errors">
-                  <div
-                    *ngIf="
-                      fc['content'].touched && fc['content'].errors['required']
-                    "
-                  >
-                    Content is required.
-                  </div>
-                </small>
-              </div>
-            </div>
-          </div>
-        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="isEditorsPick">Editor's Pick</label>
+      <select id="isEditorsPick" formControlName="isEditorsPick">
+        <option value="">Select</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+      <div *ngIf="fc['isEditorsPick'].invalid && fc['isEditorsPick'].touched" class="error">
+        Please select an option.
       </div>
-  
-      <!-- Submit Buttons -->
-      <div class="row text-center">
-        <div class="col-md-12">
-          <button type="submit" class="btn btn-primary me-3">
-            {{ formStatus }} Post
-          </button>
-          <button type="button" class="btn btn-secondary" (click) = "navigateToPost()">
-            Back to Posts
-          </button>
-        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="isFeatured">Featured Post</label>
+      <select id="isFeatured" formControlName="isFeatured">
+        <option value="">Select</option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+      </select>
+      <div *ngIf="fc['isFeatured'].invalid && fc['isFeatured'].touched" class="error">
+        Please select an option.
       </div>
-    </form>
-  </div>
-  
+    </div>
+
+    <div class="form-group">
+      <label for="description">Post Description</label>
+      <quill-editor
+        [(ngModel)]="editorContent"
+        (onContentChanged)="onContentChange($event)"
+        [modules]="quillConfig"
+        formControlName="description"
+      ></quill-editor>
+      <div *ngIf="fc['description'].invalid && fc['description'].touched" class="error">
+        Description is required.
+      </div>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn-submit">
+        Save Post
+      </button>
+      <button (click)="navigateToPost()" class="btn-back">Back to Posts</button>
+    </div>
+</form>
+</div>

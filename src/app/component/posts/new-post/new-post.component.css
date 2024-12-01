@@ -1,101 +1,97 @@
-/* General Styling */
 .container {
-    font-family: 'Arial', sans-serif;
-  }
-  
-  h3 {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .text-muted {
-    font-size: 14px;
-  }
-  
-  /* Card Styling */
-  .card {
-    border-radius: 10px;
-  }
-  
-  /* Form Elements */
-  .form-label {
-    font-weight: 600;
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  .form-control {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: none;
-    padding: 10px;
-    font-size: 14px;
-  }
-  
-  /* Quill Editor Styling */
-  /* .scrollable-editor {
-    height: 300px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  
-  .scrollable-editor .ql-editor {
-    height: 100%;
-  }
-   */
-
-
-   /* Quill Editor Styling */
-/* Quill Editor Styling */
-.scrollable-editor {
-    height: 300px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    max-width: 100%; /* Ensures the editor doesn't expand beyond its parent */
-    box-sizing: border-box; /* Ensures padding and border are included in width */
-  }
-  
-  .scrollable-editor .ql-editor {
-    height: 100%;
-    white-space: normal; /* Forces text wrapping */
-    word-wrap: break-word; /* Prevents long words from expanding the container */
-  }
-  
-.col-md-12,
-.card-body {
-  max-width: 100%; /* Ensures child elements respect column width */
-  overflow: hidden; /* Prevents content from overflowing horizontally */
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-  
-  /* Image Preview */
-  .img-preview {
-    max-height: 150px;
-    object-fit: cover;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-  }
-  
-  /* Buttons */
-  .btn {
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-  
-  .btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
-  }
-  
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="file"] {
+  margin-top: 8px;
+}
+
+.img-preview {
+  display: block;
+  margin: 10px 0;
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.quill-editor {
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+
+
+.ql-editor img {
+  max-width: 80%;
+  max-height: 70px;  /* Adjust the max height as needed */
+  object-fit: contain; /* Ensure the image maintains aspect ratio */
+  border-radius: 8px;  /* Optional: Add border radius for styling */
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px; /* Space between the buttons */
+  margin-top: 20px;
+}
+
+.btn-back, .btn-submit {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-submit {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn-submit:hover {
+  background-color: #45a049;
+}
+
+.btn-back {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.btn-back:hover {
+  background-color: #e1e1e1;
+}
+
+

@@ -1,45 +1,147 @@
+/* General container styling */
 .registration-container {
-    height: 100vh;
-  }
-  
-  .registration-card {
-    width: 100%;
-    max-width: 400px;
-    margin: 20px;
-  }
-  
-  .password-container {
-    position: relative;
-  }
-  
-  .show-password-btn {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    font-size: 0.9rem;
-    color: #007bff;
-    cursor: pointer;
-    padding: 0;
-  }
-  
-  .show-password-btn:hover {
-    color: #0056b3;
-  }
-  
-  .form-control {
-    padding-right: 60px; /* Adds space for the button inside the input */
-  }
-  
-  .back-to-login-link {
-    color: #007bff;
-    text-decoration: none;
-    font-size: 0.9rem;
-  }
-  
-  .back-to-login-link:hover {
-    text-decoration: underline;
-  }
-  
+  background-color: #f8f9fa;
+  padding: 50px;
+  justify-self: center;
+}
+
+/* Card styling */
+.registration-card {
+  border-radius: 40px;
+  border: none;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card body */
+.card-body {
+  padding: 4rem;
+}
+
+/* Heading styling */
+.card-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Form labels */
+.form-label {
+  font-weight: 600;
+  color: #495057;
+}
+
+/* Input fields */
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  height: 35px;
+  padding: 6px 10px; /* Reduced padding for a smaller height */
+  font-size: 0.9rem; /* Smaller font size */
+  max-width: 300px; /* Limit the width */
+  margin-bottom: 1rem;
+}
+
+textarea.form-control {
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  max-width: 300px; /* Adjust width for textarea */
+  height: 100px; /* Adjust height for textarea */
+  resize: none;
+}
+
+/* Bio Section Styling */
+.bio-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Space between label, textarea, and error messages */
+  max-width: 300px; /* Limit the width of the bio section */
+  margin-bottom: 1.5rem;
+}
+
+.bio-label {
+  font-weight: 600;
+  color: #495057;
+  font-size: 1rem;
+}
+
+.bio-textarea {
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  height: 100px; /* Controlled height */
+  resize: none;
+  box-shadow: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bio-textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.bio-error {
+  font-size: 0.85rem;
+  color: #dc3545;
+}
+
+/* Password visibility button */
+.show-password-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 4px 10px;
+  color: #007bff;
+}
+
+/* Checkbox styling */
+.form-check-input {
+  accent-color: #1b1c1d;
+}
+
+/* Register button */
+.btn-primary {
+  background-color: #007bff; /* Set a more vibrant primary color */
+  color: #fff; /* White text for contrast */
+  border: none;
+  border-radius: 30px; /* Rounded corners */
+  padding: 6px 10px; /* More padding for better spacing */
+  font-size: 1rem; /* Make font size a bit larger */
+  font-weight: 400; /* Bold text */
+ /* Uppercase text for better readability */
+  cursor: pointer; /* Pointer cursor to indicate clickable */
+  transition: background-color 0.3s, transform 0.2s ease; /* Smooth transition effects */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Slightly darker on hover */
+  transform: scale(1.05); /* Subtle scaling effect on hover */
+}
+
+.btn-primary:active {
+  background-color: #003d7a; /* Darker color when active */
+  transform: scale(1); /* Remove scaling effect when clicked */
+}
+
+.btn-primary:focus {
+  outline: none; /* Remove the outline when the button is focused */
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Add a glowing effect when focused */
+}
+
+/* Back to login link */
+.back-to-login-link {
+  padding-left: 90px;
+  font-size: 0.9rem;
+  color: #18191a;
+  text-decoration: none;
+}
+
+.back-to-login-link:hover {
+  text-decoration: underline;
+}
+
+/* Error messages */
+.text-danger {
+  font-size: 0.85rem;
+}

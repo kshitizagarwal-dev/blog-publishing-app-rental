@@ -17,6 +17,13 @@
     text-decoration: underline;
   }
   
+  .article-content img {
+    max-width: 100%;  /* Ensures the image does not exceed the width of its container */
+    height: auto;     /* Maintains the aspect ratio of the image */
+    display: block;   /* Makes sure the image is treated as a block element, avoiding text wrapping around it */
+    margin: 10px 0;   /* Adds space around the image */
+  }
+  
 /* Back Button */
 .back-button {
     display: flex;

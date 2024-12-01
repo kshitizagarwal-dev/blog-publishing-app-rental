@@ -19,7 +19,7 @@ export class PostsService {
     savePost(data : any){
       const postId = this.generateId();
       setDoc(doc(this.firestore, 'blogs', postId.toString()),{
-        data,
+        ...data,
         postId: postId
       }).then((docRef)=>{
         console.log("Data saved properly", docRef);

@@ -1,134 +1,128 @@
-/* General Styles */
-
+/* Global styles for the navigation bar */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-  }
-  
-  .navbar a {
-    color: white;
-    margin-right: 15px;
-    text-decoration: none;
-  }
-  
-  .user-profile {
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile-img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 5px;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  background-color: #333;
+  padding: 10px 20px;
+}
+
+.navbar-left {
+  display: flex;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 16px;
+  margin-right: 15px;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #f0a500;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-name {
+  color: white;
+  font-size: 16px;
+}
+
+.logout {
+  color: white;
+  font-size: 16px;
+}
+
+.logout:hover {
+  color: #f0a500;
+}
+
+/* Styling for author directory */
 .author-directory {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: #333;
-  }
-  
-  /* Search Bar */
-  .author-directory input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  .author-directory input:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-  
-  /* Author List */
-  .author-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  
-  .author-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .author-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Author Image */
-  .author-img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 15px;
-    object-fit: cover;
-    border: 2px solid #f1f1f1;
-  }
-  
-  .author-info h3 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .author-info p {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 10px;
-    line-height: 1.4;
-  }
-  
-  .author-info span {
-    font-size: 0.8rem;
-    color: #777;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .author-list {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    }
-  
-    .author-card {
-      padding: 15px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .author-directory {
-      padding: 10px;
-    }
-  
-    h2 {
-      font-size: 1.5rem;
-    }
-  
-    .author-list {
-      grid-template-columns: 1fr;
-    }
-  }
-  
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.author-directory h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  height: 50%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #f0a500;
+}
+
+.author-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.author-card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.author-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.author-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.author-info h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.author-info p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 0;
+}

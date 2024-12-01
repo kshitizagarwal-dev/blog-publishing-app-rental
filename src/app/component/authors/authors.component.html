@@ -1,41 +1,45 @@
 <header>
   <nav class="navbar">
     <div class="navbar-left">
-      <a routerLink="/">Home</a>
+      <a routerLink="/" class="nav-link">Posts</a>
     </div>
     <div class="navbar-right">
       <!-- Display when logged in -->
       <div *ngIf="isLoggedIn; else notLoggedIn">
-        <a routerLink="/create">Create</a>
-        <a routerLink="/posts">Posts</a>
+        <a routerLink="/create" class="nav-link">Create</a>
+        <a routerLink="/posts" class="nav-link">Posts</a>
         <div class="user-profile">
           <img [src]="userProfilePicture" alt="User Profile" class="profile-img" />
-          <span>{{ userName }}</span>
+          <span class="user-name">{{ userName }}</span>
         </div>
-        <a (click)="logout()">Logout</a>
+        <a (click)="logout()" class="nav-link logout">Logout</a>
       </div>
 
       <!-- Display when not logged in -->
       <ng-template #notLoggedIn>
-        <a (click)="redirectToLogin()">Login</a>
-        <a routerLink="/register">Sign Up</a>
+        <a routerLink="/login" class="nav-link">Login</a>
+        <a routerLink="/register" class="nav-link">Sign Up</a>
       </ng-template>
     </div>
   </nav>
 </header>
+
 <div class="author-directory">
-    <h2>Rising Authors</h2>
-    <input type="text" [(ngModel)]="searchQuery" placeholder="Search authors..." (input)="onSearch()" />
-  
-    <div class="author-list">
-      <div *ngFor="let author of authors" class="author-card">
-        <img [src]="author.profilePicture || '104.jpg'" alt="Author Image" class="author-img" />
-        <div class="author-info">
-          <h3>{{ author.name }}</h3>
-          <p>{{ author.bio }}</p>
-          <span>{{ author.views }} views</span>
-        </div>
+  <h2>Rising Authors</h2>
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchQuery" placeholder="Search authors..." (input)="onSearch()"
+     class="search-input" />
+
+    
+  </div>
+
+  <div class="author-list">
+    <div *ngFor="let author of filteredAuthors" class="author-card">
+      <img [src]="author.profilePicture || '104.jpg'" alt="Author Image" class="author-img" />
+      <div class="author-info">
+        <h3>{{ author.Name }}</h3>
+        <p>{{ author.bio }}</p>
       </div>
     </div>
   </div>
-  
+</div>

@@ -72,15 +72,19 @@ export class AuthenticationService {
   }
 
   //registation of user 
- async registration(email: string, password: string, name: string): Promise<any>{
+ async registration(email: string, password: string, name: string, isAuthor : boolean, bio : string): Promise<any>{
 
    var userCredentials = createUserWithEmailAndPassword(this.auth, email, password);
    const userID = (await userCredentials).user.uid;
+   console.log("User wit uid", userID);
    if(userID){
     setDoc(doc(this.firestore, 'users', userID),{
       Email: email,
       Password: password,
-      Name: name
+      Name: name, 
+      isAuthor:  isAuthor,
+      bio : bio,
+      userId: userID
     } ).then(()=> {
       console.log("Successfully logged in", userID);
       return true;

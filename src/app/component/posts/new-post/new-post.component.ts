@@ -3,11 +3,13 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { CategoriesService } from '../../../services/categories.service';
 import { PostsService } from '../../../services/posts.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Post } from '../../models/post';
+import Quill from 'quill';
 import { CommonModule } from '@angular/common';
-import { Firestore } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-new-post',
@@ -25,12 +27,16 @@ export class NewPostComponent {
 
   formStatus: string = 'Add New';
   docId: string | undefined;
+  authorUsername: string = '';
+  authorId: string = '';
+
 
   postForm: FormGroup = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    category: new FormControl('', Validators.required),
     postImg: new FormControl('', Validators.required),
-    content : new FormControl ('', Validators.required)
+    isEditorsPick: new FormControl('', Validators.required),
+    isFeatured: new FormControl('', Validators.required),
+    description : new FormControl ('', Validators.required)
   });
 
 
@@ -49,24 +55,52 @@ export class NewPostComponent {
     },
   };
 
+  private firestore : Firestore =  inject(Firestore);
   constructor(
     private toastr: ToastrService,
     private categoryService: CategoriesService,
     private fb: FormBuilder,
     private postService: PostsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService : AuthenticationService,
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.verifyAuthor();
+
     this.categoryService.loadData().then((val) => {
       this.categories = val;
     });
+    console.log('Form validity: ', this.postForm.valid);
+
   }
+
+  
+  async verifyAuthor() {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      const userDoc = await getDoc(doc(this.firestore, `users/${user.uid}`));
+      console.log(userDoc.data());
+      if (userDoc.exists() && userDoc.data()['isAuthor']) {
+        this.authorId = user.uid;
+        this.authorUsername = userDoc.data()['Name'];
+      } else {
+        this.toastr.error('You need to be an author to access this page.');
+        this.router.navigate(['/dashboard']);
+      }
+    } else {
+      this.toastr.warning('You need to be logged in.');
+      this.router.navigate(['/login']);
+    }
+  }
+
 
   get fc() {
     return this.postForm.controls;
   }
+     
 
   showPreview($event: any) {
     const reader = new FileReader();
@@ -82,8 +116,9 @@ export class NewPostComponent {
   }
 
   onContentChange(event: any) {
-    console.log('Editor content changed:', event.html);
+    
     this.editorContent = event.html;
+    console.log("Post fomr is ", this.postForm);
   }
 
   onTitleChanged($event: any) {
@@ -91,13 +126,18 @@ export class NewPostComponent {
 
   async saveContent() {
     const postId = this.generateId();
+   console.log("author is ", this.authorUsername, this.authorId);
     const postData = {
       title: this.postForm.value.title,
-      category: this.postForm.value.category,
-      postImg: this.postForm.value.postImg,
-      content: this.editorContent,
+      publishDate : new Date(),
+      thumbnail: this.postForm.value.postImg,
+      description: this.editorContent,
+      isFeatured: this.postForm.value.isFeatured,
+      isEditorsPick :this.postForm.value.isEditorsPick,
       postId: postId,
-      createdAt: new Date(),
+      views: 0,
+      authorId: this.authorId,
+     author: this.authorUsername.toString()
     };
 
     try {

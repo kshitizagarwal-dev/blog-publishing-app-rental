@@ -18,38 +18,17 @@ export class CategoriesService {
     }  
     
     //save data 
-  saveData(data : any){
-    const categoryId = this.generateId();
-    setDoc(doc(this.firestore, 'authors', categoryId.toString()),{
-      data,
-      Id: categoryId
-    }).then((docRef)=>{
-      console.log("Data saved properly", docRef);
-    //  this.toastrservice.success("Data insert successfully");
-    }).catch((err)=>{
-      console.log(err);
-    });
-  }
+
 
   //load data 
   async loadData(){
-    const vas = await getDocs(query(collection(this.firestore, 'authors')));
+    const vas = await getDocs(query(collection(this.firestore, 'users')));
     var data = vas.docs.map((propertie)=>propertie.data());
     console.log("New value is ",data);
     return data;
   }
 
 
-  //update data 
-  updateData(id: any, editdata: any){
-    updateDoc(doc(this.firestore, 'authors', id.toString()), {
-      editdata
-    }).then((docRef)=>{
-      console.log("Data added successfully", docRef);
-    }, err=>{
-      console.log("Error happened", err);
-    });
-  }
 
   //delete data 
   // deleteData(id: any){

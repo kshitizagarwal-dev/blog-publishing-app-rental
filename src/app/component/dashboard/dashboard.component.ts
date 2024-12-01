@@ -5,12 +5,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
-
+import { MatIconModule } from '@angular/material/icon';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, MatIconModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -24,10 +25,12 @@ export class DashboardComponent implements OnInit {
   isLoggedIn: boolean = false;
   userName: string = '';
   userProfilePicture: string = 'images.jpg';
+  private   sanitizedDescription: SafeHtml | null = null;
 
   constructor(private postServices : PostsService,
     private router : Router,
-    private authService : AuthenticationService
+   private authService : AuthenticationService,
+    private sanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +50,10 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  sanitizeHTML(description: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(description);
+  }
+
   logout(): void {
     this.authService.logout();
   }
@@ -58,13 +65,16 @@ export class DashboardComponent implements OnInit {
     console.log("Data is ", data);
     this.articles = data.map(article => {
       // Limit description to 10 words
-      article['description'] = this.limitDescription(article['description'], 10);
+      console.log("Date is ",typeof article['publishDate']);
+      article['publishDate'] = article['publishDate'].toDate();
+      
+      this.sanitizedDescription = this.sanitizeHTML(article['description']);
+      article['description'] = this.limitDescription(this.sanitizedDescription.toString(), 10);
       return article;
     });
-    this.filteredArticles = this.articles.filter(article => article.isFeatured);
+    this.featuredArticles = this.articles.filter(article => article.isFeatured);
     this.sortArticles();
-    console.log("Data is ", this.articles);
-    console.log("filtered i s", this.filteredArticles);
+  
    }, 
    err=>{
     console.log(err);
@@ -73,13 +83,26 @@ export class DashboardComponent implements OnInit {
 
    // Search articles by keyword or author
    onSearch() {
-    const query = this.searchQuery.toLowerCase();
-    this.filteredArticles = this.articles.filter(article =>
-      article.title.toLowerCase().includes(query) ||
-      article.author.toLowerCase().includes(query)
+    const query = this.searchQuery.trim().toLowerCase();
+  
+    // Clear filteredArticles if no search query
+    if (!query) {
+      this.filteredArticles = [];
+      return;
+    }
+  
+    console.log("Search query is", query);
+    this.filteredArticles = this.articles.filter(
+      (article) =>
+        article.title.toLowerCase().includes(query) ||
+        article.author.toLowerCase().includes(query)
     );
-    this.sortArticles();
+  
+    // Log filtered articles for debugging
+
+    this.sortArticles(); // Optional if sort is required after search
   }
+  
 
   onSortChange() {
     this.sortArticles();

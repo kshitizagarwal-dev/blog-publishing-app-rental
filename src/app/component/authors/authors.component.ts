@@ -3,12 +3,12 @@ import { CategoriesService } from '../../services/categories.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
-import { Route, Router } from '@angular/router';
+import { Route, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-authors',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './authors.component.html',
   styleUrl: './authors.component.css'
 })
@@ -31,8 +31,9 @@ export class AuthorsComponent {
 
   ngOnInit(): void {
     this.authorServices.loadData().then((data)=>{
-      this.authors = data;
-      console.log("Authors are ", this.authors);
+      this.authors = data; 
+      this.filteredAuthors = data;
+   
     }, 
   err=>{
     console.log(err);
@@ -55,13 +56,12 @@ export class AuthorsComponent {
     this.authService.logout();
   }
   
-  onSearch(){
-    const query = this.searchQuery;
-    console.log("author is ", query);
-    this.filteredAuthors = this.authors.filter(author=>
-      author.name.includes(query)|| author.bio.includes(query)
+  onSearch() {
+    const query = this.searchQuery.toLowerCase();  // Convert query to lowercase for case-insensitive search
+    this.filteredAuthors = this.authors.filter(author => 
+      author.Name.toLowerCase().includes(query) || author.bio?.toLowerCase().includes(query)    
     );
-    console.log("Filtered is ", this.filteredAuthors);
+  
   }
 
 
